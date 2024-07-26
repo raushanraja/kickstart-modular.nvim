@@ -136,3 +136,28 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- vim: ts=2 sts=2 sw=2 et
+--
+--
+function TTerm(count, direction, size)
+  local cmd = nil
+  local Terminal = require('toggleterm.terminal').Terminal
+  local term = Terminal:new { cmd = cmd, count = count, direction = direction, size = size }
+  term:toggle(size, direction)
+end
+
+function _G.set_terminal_keymaps()
+  local o = { noremap = true }
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], o)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-w><C-w>]], o)
+end
+
+vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
+
+-- ToggleTerm
+keymap('n', '<m-t>', "<cmd> lua TTerm(101, 'horizontal')<cr>", nonopts)
+keymap('t', '<m-t>', "<cmd> lua TTerm(101, 'horizontal')<cr>", nonopts)
+-- keymap("n", "<m-h>", "<cmd> lua TTerm(102, 'vertical',70)<cr>", nonopts)
+-- keymap("t", "<m-h>", "<cmd> lua TTerm(102, 'vertical',70)<cr>", nonopts)
+keymap('n', 'tt', "<cmd> lua TTerm(103, 'float')<cr>", nonopts)
+keymap('n', '<c-t>', "<cmd> lua TTerm(103, 'float')<cr>", nonopts)
+keymap('t', '<c-t>', "<cmd> lua TTerm(103, 'float')<cr>", nonopts)
