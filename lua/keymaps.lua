@@ -64,7 +64,7 @@ keymap('v', '<leader>ps', [["+p]], nonopts)
 
 -- Set Captial Q no operation, Format using Space-j
 keymap('n', 'Q', '<nop>', nonopts)
-keymap('n', '<leader>j', ':Format<cr>', nonopts)
+-- keymap('n', '<leader>j', ':Format<cr>', nonopts)
 
 -- NVIMTreeToggle
 keymap('n', '<leader>e', ':NvimTreeToggle<cr>', opts)
