@@ -13,7 +13,7 @@ vim.opt.breakindent = true
 vim.opt.signcolumn = 'yes'
 
 -- Configure how new splits should be opened
-vim.opt.splitright = true
+vim.opt.splitright = false
 vim.opt.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
