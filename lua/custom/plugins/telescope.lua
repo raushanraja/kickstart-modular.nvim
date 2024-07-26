@@ -13,15 +13,11 @@ local dependencies = {
     end,
   },
   { 'nvim-telescope/telescope-ui-select.nvim' }, -- Useful for getting pretty icons, but requires a Nerd Font.
-  {
-    'nvim-tree/nvim-web-devicons',
-    enabled = vim.g.have_nerd_font,
-  },
 }
 
 return {
   'nvim-telescope/telescope.nvim',
-  tag = '0.1.2',
+  tag = '0.1.7',
   event = 'VimEnter',
   dependencies = dependencies,
   config = function()
@@ -32,6 +28,12 @@ return {
         },
       },
       extensions = {
+        fzf = {
+          fuzzy = true, -- false will only do exact matching
+          override_generic_sorter = true, -- override the generic sorter
+          override_file_sorter = true, -- override the file sorter
+          case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+        },
         ['ui-select'] = { require('telescope.themes').get_dropdown() },
       },
     }
