@@ -1,38 +1,114 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+vim.g.mapleader = ' '
+vim.g.astro_typescript = 'enable'
+vim.g.astro_stylus = 'enable'
 
--- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = true
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+local opts = {
+  noremap = true,
+  silent = true,
+}
+local nonopts = {
+  noremap = true,
+  silent = false,
+}
+local keymap = vim.api.nvim_set_keymap
 
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+keymap('', 'j', 'h', opts)
+keymap('', ';', 'l', opts)
+keymap('', 'k', 'k', opts)
+keymap('', 'l', 'j', opts)
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- keymap("n", "<leader>pv", ":Ex<cr>", opts)
+keymap('n', '<C-j>', '<C-w>h', opts)
+keymap('n', '<C-;', '<C-w>l', opts)
+keymap('n', '<C-l>', '<C-w>j', opts)
+keymap('n', '<C-k>', '<C-w><C-w>', opts)
+keymap('n', '<leader>u', ':UndotreeToggle<cr>', opts)
 
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- SPLIT WINDOWS
+keymap('n', '<leader>v', '<C-w>v', opts)
+keymap('n', '<leader>h', '<C-w>s', opts)
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+keymap('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], opts)
+keymap('i', 'jk', '<esc>', opts)
+
+-- Save FIle
+keymap('n', '<leader>w', ':w<cr>', opts)
+
+-- Move Selected line up/down
+keymap('v', 'K', ":m '<-2<CR>gv=gv", opts)
+keymap('v', 'L', ":m '>+1<CR>gv=gv", opts)
+
+-- Move next line to the line where cursor is present
+keymap('n', 'J', 'mzJ`z', opts)
+
+-- Scrolling UP - DOWN
+keymap('n', '<C-d>', '<C-d>zz', opts)
+keymap('n', '<C-u>', '<C-u>zz', opts)
+
+-- Keeping the search centered
+keymap('n', 'n', 'nzzzv', opts)
+keymap('n', 'N', 'Nzzzv', opts)
+
+-- Paste without replacing the current paste buffer
+keymap('x', '<leader>p', [["_dP]], nonopts)
+
+-- Copy to systemclipboard vs nvim clipboard only
+keymap('v', '<leader>y', [["+y]], nonopts)
+keymap('n', '<leader>y', [["+y]], nonopts)
+keymap('n', '<leader>Y', [["+Y]], nonopts)
+
+keymap('n', '<leader>ps', [["+p]], nonopts)
+keymap('v', '<leader>ps', [["+p]], nonopts)
+
+-- Set Captial Q no operation, Format using Space-j
+keymap('n', 'Q', '<nop>', nonopts)
+keymap('n', '<leader>j', ':Format<cr>', nonopts)
+
+-- NVIMTreeToggle
+keymap('n', '<leader>e', ':NvimTreeToggle<cr>', opts)
+-- Lazygit Toggle
+keymap('n', '<leader>gg', ':LazyGit<cr>', opts)
+
+-- Comment Plugin
+keymap('n', '<leader>/', "<ESC><cmd>lua require('Comment.api').toggle.linewise.current()<cr>", opts)
+keymap('v', '<leader>/', "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", opts)
+
+-- DAP
+-- keymap("n", "<leader>db", "<cmd> DapToggleBreakpoint <cr>", opts)
+-- keymap("n", "<leader>dpr", "<cmd>lua require('dap-python').test_method()<cr>", opts)
+
+-- ToggleTerm
+keymap('n', '<m-t>', "<cmd> lua TTerm(101, 'horizontal')<cr>", nonopts)
+keymap('t', '<m-t>', "<cmd> lua TTerm(101, 'horizontal')<cr>", nonopts)
+-- keymap("n", "<m-h>", "<cmd> lua TTerm(102, 'vertical',70)<cr>", nonopts)
+-- keymap("t", "<m-h>", "<cmd> lua TTerm(102, 'vertical',70)<cr>", nonopts)
+keymap('n', 'tt', "<cmd> lua TTerm(103, 'float')<cr>", nonopts)
+keymap('n', '<c-t>', "<cmd> lua TTerm(103, 'float')<cr>", nonopts)
+keymap('t', '<c-t>', "<cmd> lua TTerm(103, 'float')<cr>", nonopts)
+
+-- Swithc Buffers
+keymap('n', '<leader>bb', '<cmd> bnext<cr>', nonopts)
+keymap('n', '<tab>', '<C-w><C-w>', opts)
+keymap('n', '<m-q>', '<cmd> lua ExitPrompt()<cr>', opts)
+
+-- Diffview
+keymap('n', '<leader>df', '<cmd> DiffviewFileHistory %<cr>', nonopts)
+
+-- TroubleNvim
+keymap('n', '<leader>tt', '<cmd> TroubleToggle<cr>', nonopts)
+-- keymap("n", "<leader>td", "<cmd> TroubleToggle  document_diagnostics<cr>", nonopts)
+-- keymap("n", "<leader>tw", "<cmd> TroubleToggle  workspace_diagnostics<cr>", nonopts)
+-- keymap("n", "<leader>ta", "<cmd> TroubleToggle  quickfix<cr>", nonopts)
+
+-- Telescope
+keymap('n', '<leader>tp', "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", nonopts)
+
+-- Gitsigns
+keymap('n', '<leader>hp', "<cmd>lua require('gitsigns').preview_hunk()<cr>", nonopts)
+keymap('n', '<leader>hr', "<cmd>lua require('gitsigns').reset_hunk()<cr>", nonopts)
+keymap('n', '<leader>hn', "<cmd>lua require('gitsigns').next_hunk()<cr>", nonopts)
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -42,7 +118,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', {
+    clear = true,
+  }),
   callback = function()
     vim.highlight.on_yank()
   end,
