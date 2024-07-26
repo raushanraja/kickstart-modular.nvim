@@ -4,6 +4,6 @@ return {
     main = 'ibl',
   },
   -- autopairing of (){}[] etc
-  { 'windwp/nvim-autopairs' },
+  { 'windwp/nvim-autopairs', event = 'InsertEnter', config = true },
   { 'tpope/vim-surround' },
 }
