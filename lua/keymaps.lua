@@ -13,6 +13,7 @@ local nonopts = {
   silent = false,
 }
 local keymap = vim.api.nvim_set_keymap
+local keymapset = vim.keymap.set
 
 keymap('', 'j', 'h', opts)
 keymap('', ';', 'l', opts)
@@ -109,6 +110,14 @@ keymap('n', '<leader>tp', "<cmd>lua require('telescope.builtin').colorscheme({en
 keymap('n', '<leader>hp', "<cmd>lua require('gitsigns').preview_hunk()<cr>", nonopts)
 keymap('n', '<leader>hr', "<cmd>lua require('gitsigns').reset_hunk()<cr>", nonopts)
 keymap('n', '<leader>hn', "<cmd>lua require('gitsigns').next_hunk()<cr>", nonopts)
+
+-- CopilotChat (alt-c), rather than leader-c
+keymapset('n', '<A-c>', function()
+  local input = vim.fn.input 'CC: '
+  if input ~= '' then
+    vim.cmd('CopilotChat ' .. input)
+  end
+end, nonopts)
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
