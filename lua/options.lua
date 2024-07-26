@@ -4,7 +4,7 @@
 --  For more options, you can see `:help option-list`
 
 vim.opt.showmode = false
-vim.opt.clipboard = 'unnamedplus'
+-- vim.opt.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.opt.breakindent = true

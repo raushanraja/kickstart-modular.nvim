@@ -13,10 +13,10 @@ return {
   },
   {
     'lewis6991/gitsigns.nvim',
-    lazy = true,
+    event = 'BufRead',
+    config = true,
   },
   {
     'kdheepak/lazygit.nvim',
   },
 }
-
