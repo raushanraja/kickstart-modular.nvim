@@ -1,11 +1,11 @@
 function Colors(color)
-  require('tokyonight').setup {}
   require('rose-pine').setup { disable_italics = true }
 
   -- color = color or 'ayu'
-  color = color or 'onenord'
+  -- color = color or 'onenord'
   -- color = color or "catppuccin-mocha"
   -- color = color or 'caret'
+  color = color or 'tokyonight-storm'
   -- color = color or 'tokyonight-day'
   -- color = color or 'tokyonight'
   -- color = color or "rose-pine"
