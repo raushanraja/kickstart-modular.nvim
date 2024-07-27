@@ -25,6 +25,7 @@ return {
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
+          -- map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
@@ -35,9 +36,10 @@ return {
           map('<leader>a', vim.lsp.buf.code_action, '[C]ode [A]ction')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-          vim.keymap.set('i', '<C-h>', function()
-            vim.lsp.buf.signature_help()
-          end, opts)
+          vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, {
+            buffer = event.buf,
+            desc = 'LSP: Signature [H]elp',
+          })
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.documentHighlightProvider then
