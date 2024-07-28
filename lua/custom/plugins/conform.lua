@@ -26,7 +26,7 @@ return {
           cpp = true,
         }
         return {
-          timeout_ms = 500,
+          timeout_ms = 2500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
         }
       end,
@@ -37,9 +37,23 @@ return {
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        javascript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+        typescript = { 'prettier' },
+        typescriptreact = { 'prettier' },
       },
     },
+    config = function(_, opts)
+      local conform = require 'conform'
+
+      -- Setup "conform.nvim" to work
+      conform.setup(opts)
+
+      -- Customise the default "prettier" command to format Markdown files as well
+      -- conform.formatters.prettier = {
+      --   prepend_args = { '--prose-wrap', 'always' },
+      -- }
+    end,
   },
 }
 -- vim: ts=2 sts=2 sw=2 et
