@@ -159,3 +159,11 @@ keymap('t', '<m-t>', "<cmd> lua TTerm(101, 'horizontal')<cr>", nonopts)
 keymap('n', 'tt', "<cmd> lua TTerm(103, 'float')<cr>", nonopts)
 keymap('n', '<c-t>', "<cmd> lua TTerm(103, 'float')<cr>", nonopts)
 keymap('t', '<c-t>', "<cmd> lua TTerm(103, 'float')<cr>", nonopts)
+
+-- Set up an autocommand to modify the backup extension on buffer write
+vim.api.nvim_create_autocmd('BufWritePre', {
+  callback = function()
+    local bex = '@' .. os.date '%Y-%m-%d.%H:%M'
+    vim.opt.backupext = bex
+  end,
+})
