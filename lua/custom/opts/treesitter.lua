@@ -1,6 +1,6 @@
 local opts = {
   auto_install = true,
-  ensure_installed = { 'rust', 'javascript', 'typescript', 'python', 'c', 'lua', 'vim', 'vimdoc', 'query', 'luadoc' },
+  ensure_installed = { 'rust', 'javascript', 'typescript', 'python', 'c', 'lua', 'vim', 'vimdoc', 'query', 'luadoc', 'markdown_inline', 'markdown' },
   indent = {
     enable = true,
     disable = function(_, buf)
