@@ -1,11 +1,14 @@
 function Colors(color)
-  require('rose-pine').setup { disable_italics = true }
+  -- require('rose-pine').setup { disable_italics = true }
+  color = color or 'bluloco'
 
+  -- vim.o.background = 'light'
+  -- color = color or 'zenbones'
   -- color = color or 'ayu'
   -- color = color or 'onenord'
   -- color = color or "catppuccin-mocha"
   -- color = color or 'caret'
-  color = color or 'tokyonight-storm'
+  -- color = color or 'tokyonight-storm'
   -- color = color or 'tokyonight-day'
   -- color = color or 'tokyonight'
   -- color = color or "rose-pine"
@@ -21,15 +24,15 @@ function Colors(color)
   -- vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none' })
   -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 
-  vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = 'none' })
-  vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#51B3EC', bold = true })
-  vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white', bold = true })
-  vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#FB508F', bold = true })
+  -- vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = 'none' })
+  -- vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#51B3EC', bold = true })
+  -- vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white', bold = true })
+  -- vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#FB508F', bold = true })
 
   -- Number Colors/Higlights
-  vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#7DA3D2', bold = true })
-  vim.api.nvim_set_hl(0, 'LineNr', { fg = '#CCCCCC', bold = true })
-  vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#7DA3D2', bold = true })
+  -- vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#7DA3D2', bold = true })
+  -- vim.api.nvim_set_hl(0, 'LineNr', { fg = '#CCCCCC', bold = true })
+  -- vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#7DA3D2', bold = true })
 end
 
 Colors()

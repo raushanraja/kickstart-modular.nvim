@@ -75,3 +75,7 @@ if vim.fn.has 'title' then
   --   Same thing but the other way around, (file name - parent directory)
   vim.o.titlestring = '%' .. "{expand('%:p:h:t')}/%t - (" .. vim.fn.fnamemodify(vim.fn.expand '%:p:h', ':t') .. ') - NVIM'
 end
+
+vim.g.zenbones = { lightness = 'dim', darkness = 'stark' }
+
+vim.g.aqua_transparency = 1
