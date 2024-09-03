@@ -168,7 +168,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   end,
 })
 
-keymap('n', '<space>x', '', {
+keymap('n', '<leader>tx', '', {
   noremap = true,
   callback = function()
     for _, client in ipairs(vim.lsp.buf_get_clients()) do
