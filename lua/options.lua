@@ -79,3 +79,14 @@ end
 vim.g.zenbones = { lightness = 'dim', darkness = 'stark' }
 
 vim.g.aqua_transparency = 1
+
+-- Treesitter folding
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+
+-- Add custom filetypes with their extensions
+vim.filetype.add {
+  extension = {
+    ['http'] = 'http',
+  },
+}
