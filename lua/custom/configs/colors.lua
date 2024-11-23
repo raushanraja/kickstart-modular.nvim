@@ -1,6 +1,7 @@
 function Colors(color)
   -- require('rose-pine').setup { disable_italics = true }
-  color = color or 'bluloco'
+  -- color = color or 'bluloco'
+  color = color or 'nordfox'
 
   -- vim.o.background = 'light'
   -- color = color or 'zenbones'

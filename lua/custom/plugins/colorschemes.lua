@@ -87,8 +87,8 @@ return {
     name = 'onedark',
     priority = 1000,
     opts = {
-      style = 'cool', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-      transparent = false, -- Show/hide background
+      style = 'deep', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+      transparent = true, -- Show/hide background
       term_colors = true, -- Change terminal color as per the selected theme style
       ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
       cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
@@ -137,4 +137,65 @@ return {
     priority = 1000,
     config = function() end,
   },
+  {
+    'EdenEast/nightfox.nvim',
+    opts = {
+      -- Compiled file's destination location
+      transparent = false, -- Disable setting background
+      terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
+      dim_inactive = false, -- Non focused panes set to alternative background
+      module_default = true, -- Default enable value for modules
+      styles = { -- Style to be applied to different syntax groups
+        comments = 'italic', -- Value is any valid attr-list value `:help attr-list`
+        conditionals = 'italic',
+        constants = 'italic',
+        functions = 'italic',
+        keywords = 'italic',
+        numbers = 'italic',
+        operators = 'italic',
+        strings = 'italic',
+        types = 'italic',
+        variables = 'italic',
+      },
+      inverse = { -- Inverse highlight for different types
+        match_paren = false,
+        visual = false,
+        search = false,
+      },
+      modules = { -- List of various plugins and additional options
+        -- ...
+      },
+    },
+    config = function()
+      -- Default options
+      require('nightfox').setup {
+        options = {
+          -- Compiled file's destination location
+          transparent = true, -- Disable setting background
+          terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
+          dim_inactive = false, -- Non focused panes set to alternative background
+          module_default = true, -- Default enable value for modules
+          styles = { -- Style to be applied to different syntax groups
+            comments = 'italic', -- Value is any valid attr-list value `:help attr-list`
+            strings = 'italic',
+            types = 'italic',
+          },
+          inverse = { -- Inverse highlight for different types
+            match_paren = false,
+            visual = false,
+            search = false,
+          },
+          modules = { -- List of various plugins and additional options
+            -- ...
+          },
+        },
+        palettes = {},
+        specs = {},
+        groups = {},
+      }
+
+      -- setup must be called before loading
+      vim.cmd 'colorscheme nightfox'
+    end,
+  }, -- lazy
 }
