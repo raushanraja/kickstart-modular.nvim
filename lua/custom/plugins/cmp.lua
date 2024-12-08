@@ -33,50 +33,50 @@ return {
             },
           },
         },
-        {
-          'zbirenbaum/copilot.lua',
-          opts = {
-            suggestion = { auto_trigger = true, debounce = 150, enabled = true },
-            panel = {
-              enabled = true,
-              auto_refresh = true,
-              keymap = {
-                jump_prev = '[[',
-                jump_next = ']]',
-                accept = '<CR>',
-                refresh = 'gr',
-                open = '<M-CR>',
-              },
-              layout = {
-                position = 'right', -- | top | left | right
-                ratio = 0.4,
-              },
-            },
-            server_opts_overrides = {
-              settings = {
-                advanced = {
-                  inlineSuggestCount = 5,
-                },
-              },
-            },
-          },
-        },
-        {
-          'zbirenbaum/copilot-cmp',
-          opts = function()
-            return {}
-          end,
-          config = function()
-            return {}
-          end,
-        },
+        -- {
+        --   'zbirenbaum/copilot.lua',
+        --   opts = {
+        --     suggestion = { auto_trigger = true, debounce = 150, enabled = true },
+        --     panel = {
+        --       enabled = true,
+        --       auto_refresh = true,
+        --       keymap = {
+        --         jump_prev = '[[',
+        --         jump_next = ']]',
+        --         accept = '<CR>',
+        --         refresh = 'gr',
+        --         open = '<M-CR>',
+        --       },
+        --       layout = {
+        --         position = 'right', -- | top | left | right
+        --         ratio = 0.4,
+        --       },
+        --     },
+        --     server_opts_overrides = {
+        --       settings = {
+        --         advanced = {
+        --           inlineSuggestCount = 5,
+        --         },
+        --       },
+        --     },
+        --   },
+        -- },
+        -- {
+        --   'zbirenbaum/copilot-cmp',
+        --   opts = function()
+        --     return {}
+        --   end,
+        --   config = function()
+        --     return {}
+        --   end,
+        -- },
       },
     },
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
 
-      local copilot = require 'copilot.suggestion'
+      -- local copilot = require 'copilot.suggestion'
       local snip_status_ok, luasnip = pcall(require, 'luasnip')
       luasnip.config.setup {}
 
@@ -108,9 +108,10 @@ return {
           -- ['<C-p>'] = cmp.mapping.select_prev_item(),
           --
           ['<Tab>'] = cmp.mapping(function(fallback)
-            if copilot.is_visible() then
-              copilot.accept()
-            elseif cmp.visible() then
+            -- if copilot.is_visible() then
+            --   copilot.accept()
+            if cmp.visible() then
+              -- elseif cmp.visible() then
               -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
               cmp.select_next_item()
             elseif vim.snippet.active { direction = 1 } then
@@ -164,47 +165,47 @@ return {
           --   end
           -- end, { 'i', 's' }),
           --
-          ['<C-x>'] = cmp.mapping(function()
-            if copilot.is_visible() then
-              copilot.next()
-            end
-          end),
-
-          ['<C-z>'] = cmp.mapping(function()
-            if copilot.is_visible() then
-              copilot.prev()
-            end
-          end),
-
-          ['<C-right>'] = cmp.mapping(function()
-            if copilot.is_visible() then
-              copilot.accept_word()
-            end
-          end),
-
-          ['<C-l>'] = cmp.mapping(function()
-            if copilot.is_visible() then
-              copilot.accept()
-            end
-          end),
-
-          ['<C-down>'] = cmp.mapping(function()
-            if copilot.is_visible() then
-              copilot.accept_line()
-            end
-          end),
-
-          ['<C-j>'] = cmp.mapping(function()
-            if copilot.is_visible() then
-              copilot.accept_line()
-            end
-          end),
-
-          ['<C-c>'] = cmp.mapping(function()
-            if copilot.is_visible() then
-              copilot.dismiss()
-            end
-          end),
+          -- ['<C-x>'] = cmp.mapping(function()
+          --   if copilot.is_visible() then
+          --     copilot.next()
+          --   end
+          -- end),
+          --
+          -- ['<C-z>'] = cmp.mapping(function()
+          --   if copilot.is_visible() then
+          --     copilot.prev()
+          --   end
+          -- end),
+          --
+          -- ['<C-right>'] = cmp.mapping(function()
+          --   if copilot.is_visible() then
+          --     copilot.accept_word()
+          --   end
+          -- end),
+          --
+          -- ['<C-l>'] = cmp.mapping(function()
+          --   if copilot.is_visible() then
+          --     copilot.accept()
+          --   end
+          -- end),
+          --
+          -- ['<C-down>'] = cmp.mapping(function()
+          --   if copilot.is_visible() then
+          --     copilot.accept_line()
+          --   end
+          -- end),
+          --
+          -- ['<C-j>'] = cmp.mapping(function()
+          --   if copilot.is_visible() then
+          --     copilot.accept_line()
+          --   end
+          -- end),
+          --
+          -- ['<C-c>'] = cmp.mapping(function()
+          --   if copilot.is_visible() then
+          --     copilot.dismiss()
+          --   end
+          -- end),
 
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then

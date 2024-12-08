@@ -83,8 +83,8 @@ keymap('v', '<leader>/', "<ESC><cmd>lua require('Comment.api').toggle.linewise(v
 -- ToggleTerm
 keymap('n', '<m-t>', "<cmd> lua TTerm(101, 'horizontal')<cr>", nonopts)
 keymap('t', '<m-t>', "<cmd> lua TTerm(101, 'horizontal')<cr>", nonopts)
--- keymap("n", "<m-h>", "<cmd> lua TTerm(102, 'vertical',70)<cr>", nonopts)
--- keymap("t", "<m-h>", "<cmd> lua TTerm(102, 'vertical',70)<cr>", nonopts)
+keymap('n', '<m-h>', "<cmd> lua TTerm(102, 'vertical',70)<cr>", nonopts)
+keymap('t', '<m-h>', "<cmd> lua TTerm(102, 'vertical',70)<cr>", nonopts)
 keymap('n', 'tt', "<cmd> lua TTerm(103, 'float')<cr>", nonopts)
 keymap('n', '<c-t>', "<cmd> lua TTerm(103, 'float')<cr>", nonopts)
 keymap('t', '<c-t>', "<cmd> lua TTerm(103, 'float')<cr>", nonopts)
@@ -109,13 +109,13 @@ keymap('n', '<leader>hp', "<cmd>lua require('gitsigns').preview_hunk()<cr>", non
 keymap('n', '<leader>hr', "<cmd>lua require('gitsigns').reset_hunk()<cr>", nonopts)
 keymap('n', '<leader>hn', "<cmd>lua require('gitsigns').next_hunk()<cr>", nonopts)
 
--- CopilotChat (alt-c), rather than leader-c
-keymapset('n', '<A-c>', function()
-  local input = vim.fn.input 'CC: '
-  if input ~= '' then
-    vim.cmd('CopilotChat ' .. input)
-  end
-end, nonopts)
+-- -- CopilotChat (alt-c), rather than leader-c
+-- keymapset('n', '<A-c>', function()
+--   local input = vim.fn.input 'CC: '
+--   if input ~= '' then
+--     vim.cmd('CopilotChat ' .. input)
+--   end
+-- end, nonopts)
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
