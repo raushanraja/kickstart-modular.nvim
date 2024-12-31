@@ -71,6 +71,18 @@ keymap('n', 'Q', '<nop>', nonopts)
 keymap('n', '<leader>e', ':NvimTreeToggle<cr>', opts)
 -- Lazygit Toggle
 keymap('n', '<leader>gg', ':LazyGit<cr>', opts)
+keymapset('n', '<leader>gb', function()
+  Snacks.git.blame_line()
+end, opts)
+keymapset({ 'n', 'x' }, '<leader>gB', function()
+  Snacks.gitbrowse()
+end, opts)
+keymapset('n', '<leader>gf', function()
+  Snacks.lazygit.log_file()
+end, { desc = 'Lazygit Current File History' })
+keymapset('n', '<leader>gl', function()
+  Snacks.lazygit.log()
+end, { desc = 'Lazygit Log' })
 
 -- Comment Plugin
 keymap('n', '<leader>/', "<ESC><cmd>lua require('Comment.api').toggle.linewise.current()<cr>", opts)
@@ -110,12 +122,12 @@ keymap('n', '<leader>hr', "<cmd>lua require('gitsigns').reset_hunk()<cr>", nonop
 keymap('n', '<leader>hn', "<cmd>lua require('gitsigns').next_hunk()<cr>", nonopts)
 
 -- -- CopilotChat (alt-c), rather than leader-c
--- keymapset('n', '<A-c>', function()
---   local input = vim.fn.input 'CC: '
---   if input ~= '' then
---     vim.cmd('CopilotChat ' .. input)
---   end
--- end, nonopts)
+keymapset('n', '<A-c>', function()
+  local input = vim.fn.input 'CC: '
+  if input ~= '' then
+    vim.cmd('CopilotChat ' .. input)
+  end
+end, nonopts)
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -168,6 +180,18 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     vim.opt.backupext = bex
   end,
 })
+
+function build_and_run_rust()
+  local filepath = vim.fn.expand '%:p' -- Get the full path of the current file
+  print('Building and running Rust file: ' .. filepath)
+  -- For standalone Rust file, use rustc to compile and run
+  pwd = vim.fn.getcwd()
+  cmd = string.format('rustc %s && ./%s', filepath, vim.fn.expand '%:r')
+  vim.cmd('!' .. cmd) -- Execute the command
+end
+
+-- Map the function to a key (e.g., <leader>r for running Rust files)
+keymap('n', 'tq', '<cmd>lua build_and_run_rust()<cr>', nonopts)
 
 keymap('n', '<leader>tx', '', {
   noremap = true,
