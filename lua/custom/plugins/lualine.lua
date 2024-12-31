@@ -15,7 +15,7 @@ return {
       always_divide_middle = true,
       globalstatus = true,
       refresh = {
-        statusline = 1000,
+        statusline = 100,
         tabline = 1000,
         winbar = 1000,
       },
@@ -24,7 +24,14 @@ return {
       lualine_a = { 'mode' },
       lualine_b = { 'branch', 'diff', 'diagnostics' },
       lualine_c = { 'filename' },
-      lualine_x = { 'encoding', 'fileformat', 'filetype' },
+      lualine_x = {
+        function()
+          return ' ' .. os.date '%Y-%m-%d %H:%M:%S'
+        end,
+        'encoding',
+        'fileformat',
+        'filetype',
+      },
       lualine_y = { 'progress' },
       lualine_z = { 'location' },
     },

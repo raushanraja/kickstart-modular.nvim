@@ -92,3 +92,19 @@ vim.filetype.add {
 }
 -- Disable virtual_text since it's redundant due to lsp_lines.
 vim.diagnostic.config { virtual_text = false }
+
+-- Set signs for diagnostics
+
+local signs = {
+  Error = '',
+  Warning = '',
+  Information = '',
+  Question = '',
+  Hint = '',
+  Debug = '',
+  Trace = '✎',
+}
+for type, icon in pairs(signs) do
+  local hl = 'DiagnosticSign' .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
