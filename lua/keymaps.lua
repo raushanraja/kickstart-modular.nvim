@@ -109,10 +109,6 @@ keymap('n', '<m-q>', '<cmd> lua ExitPrompt()<cr>', opts)
 -- Diffview
 keymap('n', '<leader>df', '<cmd> DiffviewFileHistory %<cr>', nonopts)
 
--- TroubleNvim
-keymap('n', '<leader>tt', '<cmd>Trouble diagnostics toggle<cr>', nonopts)
-keymap('n', '<leader>td', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', nonopts)
-
 -- Telescope
 keymap('n', '<leader>tp', "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", nonopts)
 
@@ -183,10 +179,12 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 
 function build_and_run_rust()
   local filepath = vim.fn.expand '%:p' -- Get the full path of the current file
-  print('Building and running Rust file: ' .. filepath)
+
+  if vim.fn.expand '%:e' ~= 'rs' then
+    return
+  end
   -- For standalone Rust file, use rustc to compile and run
-  pwd = vim.fn.getcwd()
-  cmd = string.format('rustc %s && ./%s', filepath, vim.fn.expand '%:r')
+  local cmd = string.format('rustc %s && ./%s', filepath, vim.fn.expand '%:r')
   vim.cmd('!' .. cmd) -- Execute the command
 end
 
