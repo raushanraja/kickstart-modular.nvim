@@ -190,12 +190,3 @@ end
 
 -- Map the function to a key (e.g., <leader>r for running Rust files)
 keymap('n', 'tq', '<cmd>lua build_and_run_rust()<cr>', nonopts)
-
-keymap('n', '<leader>tx', '', {
-  noremap = true,
-  callback = function()
-    for _, client in ipairs(vim.lsp.buf_get_clients()) do
-      require('workspace-diagnostics').populate_workspace_diagnostics(client, 0)
-    end
-  end,
-})
