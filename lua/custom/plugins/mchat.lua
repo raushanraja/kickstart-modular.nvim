@@ -1,0 +1,94 @@
+return {
+  -- 'raushanraja/model.nvim',
+  --
+  -- -- Don't need these if lazy = false
+  -- cmd = { 'M', 'Model', 'Mchat' },
+  -- init = function()
+  --   vim.filetype.add {
+  --     extension = {
+  --       mchat = 'markdown',
+  --       markdown = 'markdown',
+  --     },
+  --   }
+  -- end,
+  -- ft = 'markdown',
+  --
+  -- keys = {
+  --   { '<C-m>d', ':Mdelete<cr>', mode = 'n' },
+  --   { '<C-m>s', ':Mselect<cr>', mode = 'n' },
+  --   { '<C-m><space>', ':Mchat<cr>', mode = 'n' },
+  --   { '<C-s>', '<Esc>:Mchat<cr>', mode = 'i' },
+  -- },
+  --
+  -- -- To override defaults add a config field and call setup()
+  --
+  -- config = function()
+  --   local ollama = require 'model.providers.ollama'
+  --   local ollamachat = require 'model.providers.ollamachat'
+  --   local mode = require('model').mode
+  --   local starling_fmt = require 'model.format.starling'
+  --   local ollamachat_fmt = require 'model.format.ollamachat'
+  --
+  --   local function input_if_selection(input, context)
+  --     return context.selection and input or ''
+  --   end
+  --
+  --   require('model').setup {
+  --     prompts = {
+  --       ct = {
+  --         provider = ollama,
+  --         params = {
+  --           model = 'jm',
+  --           raw = false,
+  --         },
+  --         options = {
+  --           url = 'http://192.168.0.236:11434',
+  --         },
+  --         mode = mode.BUFFER,
+  --         builder = function()
+  --           local git_diff = vim.fn.system { 'git', 'diff', '--staged' }
+  --           ---@cast git_diff string
+  --           if not git_diff:match '^diff' then
+  --             error('Git error:\n' .. git_diff)
+  --           end
+  --           return {
+  --             Prompt = git_diff,
+  --           }
+  --         end,
+  --       },
+  --     },
+  --     chats = {
+  --       qw = {
+  --         provider = ollama,
+  --         options = {
+  --           url = 'http://192.168.0.236:11434',
+  --         },
+  --         params = {
+  --           model = 'qwen2.5-coder:14b',
+  --         },
+  --         create = input_if_selection,
+  --         run = starling_fmt.chat,
+  --       },
+  --       cqw = {
+  --         provider = ollamachat,
+  --         options = {
+  --           url = 'http://192.168.0.236:11434',
+  --         },
+  --         params = {
+  --           model = 'qwen2.5-coder:14b',
+  --         },
+  --         create = input_if_selection,
+  --         run = ollamachat_fmt.chat,
+  --       },
+  --     },
+  --
+  --     --     chats = {..},
+  --     --     ..
+  --   }
+  --   --
+  --   --   require('model.providers.llamacpp').setup({
+  --   --     binary = '~/path/to/server/binary',
+  --   --     models = '~/path/to/models/directory'
+  --   --   })
+  -- end,
+}
