@@ -20,6 +20,9 @@ keymap('', ';', 'l', opts)
 keymap('', 'k', 'k', opts)
 keymap('', 'l', 'j', opts)
 
+-- Diagnostic keymaps
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
 -- keymap("n", "<leader>pv", ":Ex<cr>", opts)
 keymap('n', '<C-j>', '<C-w>h', opts)
 keymap('n', '<C-;', '<C-w>l', opts)
