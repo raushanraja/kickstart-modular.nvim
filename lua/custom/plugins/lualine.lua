@@ -26,7 +26,7 @@ return {
       lualine_c = { 'filename' },
       lualine_x = {
         function()
-          return ' ' .. os.date '%Y-%m-%d %H:%M:%S'
+          return '🕓' .. os.date '%Y-%m-%d %H:%M:%S'
         end,
         'encoding',
         'fileformat',

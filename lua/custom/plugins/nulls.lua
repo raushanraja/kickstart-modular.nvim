@@ -15,9 +15,9 @@ return {
       -- nls.builtins.diagnostics.pylint,
       -- nls.builtins.diagnostics.mypy,
       require 'none-ls.diagnostics.ruff',
-      require('none-ls.diagnostics.eslint').with {
-        args = { '--format', 'json' },
-      },
+      -- require('none-ls.diagnostics.eslint').with {
+      --   args = { '--format', 'json' },
+      -- },
     })
   end,
 }

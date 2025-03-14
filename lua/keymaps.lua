@@ -22,6 +22,7 @@ keymap('', 'l', 'j', opts)
 
 -- Diagnostic keymaps
 -- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>tn', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
 
 -- keymap("n", "<leader>pv", ":Ex<cr>", opts)
 keymap('n', '<C-j>', '<C-w>h', opts)
@@ -127,6 +128,11 @@ keymapset('n', '<A-c>', function()
   end
 end, nonopts)
 
+-- alt-c-m = :CopilotChatCommit, just call it
+keymapset('n', '<A-m>', function()
+  vim.cmd 'CopilotChatCommit'
+end, nonopts)
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -185,10 +191,39 @@ function build_and_run_rust()
   if vim.fn.expand '%:e' ~= 'rs' then
     return
   end
-  -- For standalone Rust file, use rustc to compile and run
-  local cmd = string.format('rustc %s && ./%s', filepath, vim.fn.expand '%:r')
-  vim.cmd('!' .. cmd) -- Execute the command
+
+  -- Check if Cargo.toml is present in the project directory
+  local cargo_toml = vim.fn.findfile('Cargo.toml', '.;')
+  if cargo_toml ~= '' then
+    vim.cmd '!cargo run' -- Run cargo run if Cargo.toml is found
+  else
+    -- For standalone Rust file, use rustc to compile and run
+    local cmd = string.format('rustc %s && ./%s', filepath, vim.fn.expand '%:r')
+    vim.cmd('!' .. cmd) -- Execute the command
+  end
+end
+
+function run_rust_tests()
+  local filepath = vim.fn.expand '%:p' -- Get the full path of the current file
+  local filename = vim.fn.expand '%:t:r' -- Get the filename without extension
+  local filedir = vim.fn.expand '%:p:h' -- Get the directory of the current file
+
+  if vim.fn.expand '%:e' ~= 'rs' then
+    return
+  end
+
+  -- Check if Cargo.toml is present in the project directory
+  local cargo_toml = vim.fn.findfile('Cargo.toml', '.;')
+  if cargo_toml ~= '' then
+    vim.cmd '!cargo test' -- Run cargo test if Cargo.toml is found
+  else
+    -- For standalone Rust file, use rustc to compile and run tests
+    -- local cmd = string.format('rustc --test %s -o %s/%s && %s/%s --nocapture', filepath, filedir, filename, filedir, filename)
+    local cmd = string.format('rustc --test %s -o %s/%s && %s/%s --nocapture && rm %s/%s', filepath, filedir, filename, filedir, filename, filedir, filename)
+    vim.cmd('!' .. cmd) -- Execute the command
+  end
 end
 
 -- Map the function to a key (e.g., <leader>r for running Rust files)
 keymap('n', 'tq', '<cmd>lua build_and_run_rust()<cr>', nonopts)
+keymap('n', 'tw', '<cmd>lua run_rust_tests()<cr>', nonopts)
