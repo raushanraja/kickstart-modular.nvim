@@ -11,6 +11,8 @@ local ensure_installed = {
   'rustfmt',
   'mypy',
   'debugpy',
+  'codelldb',
+  'cpptools',
 }
 
 return {
