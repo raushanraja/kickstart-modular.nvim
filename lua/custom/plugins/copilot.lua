@@ -4,6 +4,7 @@ return {
     dependencies = { 'zbirenbaum/copilot-cmp' },
     opts = {
       suggestion = { auto_trigger = true, debounce = 150, enabled = true },
+      -- suggestion = { auto_trigger = false, debounce = 150, enabled = false },
       panel = {
         enabled = true,
         auto_refresh = true,

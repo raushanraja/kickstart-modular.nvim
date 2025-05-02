@@ -8,6 +8,7 @@ return {
     },
     opts = {
       debug = false, -- Enable debugging
+      model = 'gpt-4',
     },
     -- See Commands section for default commands if you want to lazy load on them
   },
