@@ -63,7 +63,7 @@ vim.opt.smartcase = true
 vim.opt.title = true
 
 -- vim.opt.foldmethod = "indent"
-vim.o.statuscolumn = '%C%s%r  '
+vim.o.statuscolumn = '%C%s%l  '
 
 if vim.fn.has 'title' then
   -- local current_file = vim.fn.expand('%:p:h')                     -- Get the full path of the parent directory
